@@ -10,10 +10,11 @@ sh ${script_dir}/compile_with_low_tolerance.sh
 
 rm -rf debian/usr
 mkdir -p debian/usr/bin
-cp build/bin/Atropos debian/usr/bin/Atropos_wlt
-cp build/bin/ImageMath debian/usr/bin/ImageMath_wlt
-cp build/bin/N3BiasFieldCorrection debian/usr/bin/N3BiasFieldCorrection_wlt
-cp build/bin/N4BiasFieldCorrection debian/usr/bin/N4BiasFieldCorrection_wlt
+builddir=build/bin
+cp $builddir/Atropos debian/usr/bin/Atropos_wlt
+cp $builddir/ImageMath debian/usr/bin/ImageMath_wlt
+cp $builddir/N3BiasFieldCorrection debian/usr/bin/N3BiasFieldCorrection_wlt
+cp $builddir/N4BiasFieldCorrection debian/usr/bin/N4BiasFieldCorrection_wlt
 
 version="1.9.4"
 package="ants-with-low-tolerance"

@@ -12,7 +12,7 @@ sh ${script_dir}/dwn_itk.sh $itk_version
 itk="InsightToolkit-$itk_version"
 
 # build dependencies
-sh ${script_dir}/build_itk_with_low_tolerance.sh $itk
+sh ${script_dir}/build_itk_with_low_tolerance.sh $itk_version
 
 # only build the subset of Example binaries needed
 sed -i 's/foreach(ANTS_APP ${BASE_ANTS_APPS})/foreach(ANTS_APP ImageMath N3BiasFieldCorrection N4BiasFieldCorrection Atropos)/g' deps/ANTs/Examples/CMakeLists.txt

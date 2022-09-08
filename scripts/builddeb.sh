@@ -10,10 +10,11 @@ sh ${script_dir}/compile.sh
 
 rm -rf debian/usr
 mkdir -p debian/usr/bin
-cp build/bin/Atropos debian/usr/bin
-cp build/bin/ImageMath debian/usr/bin
-cp build/bin/N3BiasFieldCorrection debian/usr/bin
-cp build/bin/N4BiasFieldCorrection debian/usr/bin
+builddir=build/bin
+cp $builddir/Atropos debian/usr/bin
+cp $builddir/ImageMath debian/usr/bin
+cp $builddir/N3BiasFieldCorrection debian/usr/bin
+cp $builddir/N4BiasFieldCorrection debian/usr/bin
 
 version="1.9.4"
 package="ants"

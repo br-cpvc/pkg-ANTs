@@ -3,11 +3,12 @@ set -e
 set -x
 
 cwd=`pwd`
-itk=$1
+itk_version=$1
+itk="InsightToolkit-$itk_version"
 
 if [ ! -d $itk ]; then
     tar -zxf deps/itk/${itk}.tar.gz
-    mv ITK-4.8.2 ${itk}
+    mv ITK-${itk_version} ${itk}
 
     # version 4.8.2 requires cmake 2.8.9 by default, ubuntu 12.04 only have 2.8.7, this seems to fix the problem without errors
     backupdir="backup"
@@ -19,7 +20,7 @@ if [ ! -d $itk ]; then
     # avoids warning by disabling functionality: SystemTools.cxx:(.text+0x1b6a): warning: Using 'getpwnam' in statically linked applications requires at runtime the shared libraries from the glibc version used for linking
     f="$itk/Modules/ThirdParty/KWSys/src/KWSys/SystemTools.cxx"
     cp $f $backupdir
-    sed -i 's/# define HAVE_GETPWNAM 1/# undef HAVE_GETPWNAM/' $f
+    sed -i 's/define HAVE_GETPWNAM 1/undef HAVE_GETPWNAM/' $f
 
     cd $itk
     mkdir -p build
