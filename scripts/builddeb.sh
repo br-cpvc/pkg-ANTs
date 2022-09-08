@@ -5,20 +5,45 @@ set -x
 BUILD_NUMBER=$1
 
 script_dir=$(dirname "$0")
+cwd=`pwd`
 cd ${script_dir}/..
+
 outputdir=output
-source ${script_dir}/compile.sh ${script_dir}/build_itk.sh $outputdir
+
+old_method=true
+if [[ "$old_method" == true ]]; then
+    # build using custom downloaded version of itk
+    source ${script_dir}/compile.sh ${script_dir}/build_itk.sh $outputdir
+else
+    # build using the itk version specified inside
+    # the ANTs SuperBuild/External_ITKv5.cmake script
+    source ${script_dir}/configure.sh $outputdir/build
+    if [ ! -d $outputdir/build/staging ]; then
+    # hack: this is only included to trigger the git checkout as
+    # we want to patch the source files before it is compiled,
+    # no compilation is actually required here, and will be redone
+    # after the code has been patched!
+    cd $outputdir/build
+    source ${script_dir}/make.sh ITKv5
+    cd $cwd
+    fi
+    source ${script_dir}/patch_itk.sh $outputdir/build/ITKv5
+    cd $outputdir/build
+    sh ${script_dir}/make.sh
+    cd $cwd
+fi
 
 deb_root=${outputdir}/debian
 rm -rf ${deb_root}/usr
 mkdir -p ${deb_root}/usr/bin
-builddir=${outputdir}/build/bin
-cp $builddir/Atropos ${deb_root}/usr/bin
-cp $builddir/ImageMath ${deb_root}/usr/bin
-cp $builddir/N3BiasFieldCorrection ${deb_root}/usr/bin
-cp $builddir/N4BiasFieldCorrection ${deb_root}/usr/bin
+bindir=${outputdir}/build/ANTS-build/Examples
+cp $bindir/Atropos ${deb_root}/usr/bin
+cp $bindir/ImageMath ${deb_root}/usr/bin
+cp $bindir/N3BiasFieldCorrection ${deb_root}/usr/bin
+cp $bindir/N4BiasFieldCorrection ${deb_root}/usr/bin
 
 cmake_version_file=deps/ANTs/CMakeLists.txt
+cmake_version_file=deps/ANTs/Version.cmake
 version_major=$(cat $cmake_version_file | grep "_VERSION_MAJOR " | awk '{print $2}' | cut -d'"' -f2)
 version_minor=$(cat $cmake_version_file | grep "_VERSION_MINOR " | awk '{print $2}' | cut -d'"' -f2)
 version_patch=$(cat $cmake_version_file | grep "_VERSION_PATCH " | awk '{print $2}' | cut -d'"' -f2 | tr -d v)
