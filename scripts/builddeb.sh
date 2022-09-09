@@ -16,7 +16,12 @@ cp $builddir/ImageMath debian/usr/bin
 cp $builddir/N3BiasFieldCorrection debian/usr/bin
 cp $builddir/N4BiasFieldCorrection debian/usr/bin
 
-version="1.9.4"
+cmake_version_file=deps/ANTs/CMakeLists.txt
+version_major=$(cat $cmake_version_file | grep "_VERSION_MAJOR " | awk '{print $2}' | cut -d'"' -f2)
+version_minor=$(cat $cmake_version_file | grep "_VERSION_MINOR " | awk '{print $2}' | cut -d'"' -f2)
+version_patch=$(cat $cmake_version_file | grep "_VERSION_PATCH " | awk '{print $2}' | cut -d'"' -f2 | tr -d v)
+
+version="$version_major.$version_minor.$version_patch"
 package="ants"
 maintainer="ANTsX/ANTs <https://github.com/ANTsX/ANTs/issues>"
 arch="amd64"

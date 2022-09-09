@@ -1,28 +1,14 @@
-# was previous compiled against minc version 2.1.10 from the minc-registration project
+#!/usr/bin/env bash
 set -e
 set -x
+script_dir=$(dirname "$0")
 
-cwd=`pwd`
-itk_version=$1
-itk="InsightToolkit-$itk_version"
+itk_dir=$1
 
-if [ ! -d $itk ]; then
-    tar -zxf deps/itk/${itk}.tar.gz
-    mv ITK-${itk_version} ${itk}
+if [ -d $itk_dir ]; then
+    sh ${script_dir}/patch_itk.sh $itk_dir
 
-    # version 4.8.2 requires cmake 2.8.9 by default, ubuntu 12.04 only have 2.8.7, this seems to fix the problem without errors
-    backupdir="backup"
-    mkdir -p $backupdir
-    f="$itk/CMakeLists.txt"
-    cp $f $backupdir
-    sed -i 's/cmake_minimum_required(VERSION 2.8.9 FATAL_ERROR)/cmake_minimum_required(VERSION 2.8.7 FATAL_ERROR)/g' $f
-
-    # avoids warning by disabling functionality: SystemTools.cxx:(.text+0x1b6a): warning: Using 'getpwnam' in statically linked applications requires at runtime the shared libraries from the glibc version used for linking
-    f="$itk/Modules/ThirdParty/KWSys/src/KWSys/SystemTools.cxx"
-    cp $f $backupdir
-    sed -i 's/define HAVE_GETPWNAM 1/undef HAVE_GETPWNAM/' $f
-
-    cd $itk
+    cd $itk_dir
     mkdir -p build
     cd build
     cmake .. \
