@@ -7,12 +7,12 @@ cwd=`pwd`
 #itk_version="4.5.0"
 #itk_version="4.7.2"
 itk_version=4.8.2
-sh ${script_dir}/dwn_itk.sh $itk_version
+source ${script_dir}/dwn_itk.sh $itk_version
 
 itk_dir="InsightToolkit-$itk_version"
 
 # build dependencies
-sh ${script_dir}/build_itk_with_low_tolerance.sh $itk_dir
+source ${script_dir}/build_itk_with_low_tolerance.sh $itk_dir
 
 # only build the subset of Example binaries needed
 sed -i 's/foreach(ANTS_APP ${BASE_ANTS_APPS})/foreach(ANTS_APP ImageMath N3BiasFieldCorrection N4BiasFieldCorrection Atropos)/g' deps/ANTs/Examples/CMakeLists.txt
@@ -31,5 +31,5 @@ cmake ../deps/ANTs/ \
 -DCMAKE_CXX_FLAGS="-fopenmp" \
 -DCMAKE_EXE_LINKER_FLAGS="-static"
 
-sh ${script_dir}/make.sh
+source ${script_dir}/make.sh
 cd ..

@@ -6,7 +6,7 @@ script_dir=$(dirname "$0")
 itk_dir=$1
 
 if [ -d $itk_dir ]; then
-    sh ${script_dir}/patch_itk.sh $itk_dir
+    source ${script_dir}/patch_itk.sh $itk_dir
 
     cd $itk_dir
     mkdir -p build

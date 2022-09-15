@@ -6,7 +6,7 @@ BUILD_NUMBER=$1
 
 script_dir=$(dirname "$0")
 cd ${script_dir}/..
-sh ${script_dir}/compile_with_low_tolerance.sh
+source ${script_dir}/compile_with_low_tolerance.sh
 
 rm -rf debian/usr
 mkdir -p debian/usr/bin
