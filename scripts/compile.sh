@@ -31,5 +31,5 @@ cmake ../deps/ANTs/ \
 -DCMAKE_CXX_FLAGS="-fopenmp" \
 -DCMAKE_EXE_LINKER_FLAGS="-static"
 
-source ${script_dir}/make.sh
+sh ${script_dir}/make.sh
 cd ..
