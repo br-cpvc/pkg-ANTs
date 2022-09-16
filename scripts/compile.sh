@@ -13,7 +13,8 @@ source ${script_dir}/dwn_itk.sh $itk_dir_prefix $itk_version
 itk_dir="$itk_dir_prefix-$itk_version"
 
 # build dependencies
-source ${script_dir}/build_itk.sh $itk_dir
+build_script=$1
+source $build_script $itk_dir
 
 # only build the subset of Example binaries needed
 sed -i 's/foreach(ANTS_APP ${BASE_ANTS_APPS})/foreach(ANTS_APP ImageMath N3BiasFieldCorrection N4BiasFieldCorrection Atropos)/g' deps/ANTs/Examples/CMakeLists.txt
