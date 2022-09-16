@@ -6,15 +6,17 @@ BUILD_NUMBER=$1
 
 script_dir=$(dirname "$0")
 cd ${script_dir}/..
-source ${script_dir}/compile.sh ${script_dir}/build_itk_with_low_tolerance.sh
+outputdir=output_wlt
+source ${script_dir}/compile.sh ${script_dir}/build_itk_with_low_tolerance.sh $outputdir
 
-rm -rf debian/usr
-mkdir -p debian/usr/bin
-builddir=build/bin
-cp $builddir/Atropos debian/usr/bin/Atropos_wlt
-cp $builddir/ImageMath debian/usr/bin/ImageMath_wlt
-cp $builddir/N3BiasFieldCorrection debian/usr/bin/N3BiasFieldCorrection_wlt
-cp $builddir/N4BiasFieldCorrection debian/usr/bin/N4BiasFieldCorrection_wlt
+deb_root=${outputdir}/debian
+rm -rf ${deb_root}/usr
+mkdir -p ${deb_root}/usr/bin
+builddir=$outputdir/build/bin
+cp $builddir/Atropos ${deb_root}/usr/bin/Atropos_wlt
+cp $builddir/ImageMath ${deb_root}/usr/bin/ImageMath_wlt
+cp $builddir/N3BiasFieldCorrection ${deb_root}/usr/bin/N3BiasFieldCorrection_wlt
+cp $builddir/N4BiasFieldCorrection ${deb_root}/usr/bin/N4BiasFieldCorrection_wlt
 
 cmake_version_file=deps/ANTs/CMakeLists.txt
 version_major=$(cat $cmake_version_file | grep "_VERSION_MAJOR " | awk '{print $2}' | cut -d'"' -f2)
@@ -59,13 +61,11 @@ if [ ! -z ${BUILD_NUMBER} ]; then
     description="$description, build number=${BUILD_NUMBER}"
 fi
 
-outdir="debian"
+installedsize=`du -s ${deb_root}| awk '{print $1}'`
 
-installedsize=`du -s $outdir | awk '{print $1}'`
-
-mkdir -p debian/DEBIAN/
+mkdir -p ${deb_root}/DEBIAN/
 #for format see: https://www.debian.org/doc/debian-policy/ch-controlfields.html
-cat > debian/DEBIAN/control << EOF |
+cat > ${deb_root}/DEBIAN/control << EOF |
 Section: science
 Priority: extra
 Maintainer: $maintainer
@@ -79,7 +79,7 @@ EOF
 
 echo "Creating .deb file: $packagefile"
 rm -f ${package}_*.deb
-fakeroot dpkg-deb --build $outdir $packagefile
+fakeroot dpkg-deb --build ${deb_root} $packagefile
 
 echo "Package info"
 dpkg -I $packagefile

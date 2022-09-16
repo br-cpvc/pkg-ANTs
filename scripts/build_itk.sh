@@ -2,6 +2,7 @@
 set -e
 set -x
 script_dir=$(dirname "$0")
+cwd=`pwd`
 
 itk_dir=$1
 
@@ -23,5 +24,5 @@ if [ -d $itk_dir ]; then
     n=`nproc --ignore 1`
     make -j $n
     make install
-    cd ../..
+    cd $cwd
 fi
