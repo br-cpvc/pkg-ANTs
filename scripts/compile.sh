@@ -7,9 +7,10 @@ cwd=`pwd`
 #itk_version="4.5.0"
 #itk_version="4.7.2"
 itk_version=4.8.2
-source ${script_dir}/dwn_itk.sh $itk_version
+itk_dir_prefix="InsightToolkit"
+source ${script_dir}/dwn_itk.sh $itk_dir_prefix $itk_version
 
-itk_dir="InsightToolkit-$itk_version"
+itk_dir="$itk_dir_prefix-$itk_version"
 
 # build dependencies
 source ${script_dir}/build_itk.sh $itk_dir
