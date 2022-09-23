@@ -61,7 +61,7 @@ if [ ! -z ${BUILD_NUMBER} ]; then
     description="$description, build number=${BUILD_NUMBER}"
 fi
 
-installedsize=`du -s ${deb_root}| awk '{print $1}'`
+installedsize=`du -s ${deb_root} | awk '{print $1}'`
 
 mkdir -p ${deb_root}/DEBIAN/
 #for format see: https://www.debian.org/doc/debian-policy/ch-controlfields.html
