@@ -13,6 +13,7 @@ url=https://github.com/InsightSoftwareConsortium/ITK/archive/refs/tags
 if [ ! -f $itk_pkg ]; then
 	wget $url/v$itk_version.tar.gz -O $itk_pkg
 fi
+#md5sum $itk_pkg > $itk_pkg.md5sum
 md5sum -c $itk_pkg.md5sum
 
 if [ ! -d $itk_dir ]; then
