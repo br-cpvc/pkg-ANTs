@@ -23,7 +23,6 @@ if [ -d $itk_dir ]; then
 	-DITK_DYNAMIC_LOADING=OFF \
 	-DModule_ITKReview=ON
     n=`nproc --ignore 1`
-    make -j $n
-    make install
+    make -j $n install
     cd $cwd
 fi
