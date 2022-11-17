@@ -46,8 +46,8 @@ cd $outputdir/build
 cmake $cwd/deps/ANTs/ \
 -DCMAKE_INSTALL_PREFIX=../install \
 -DCMAKE_BUILD_TYPE=Release \
--DCMAKE_C_COMPILER=/usr/bin/gcc-7 \
--DCMAKE_CXX_COMPILER=/usr/bin/g++-7 \
+-DCMAKE_C_COMPILER=/usr/bin/gcc-11 \
+-DCMAKE_CXX_COMPILER=/usr/bin/g++-11 \
 -DITK_DIR=$cwd/$itk_dir/build \
 -DRUN_LONG_TESTS=OFF \
 -DRUN_SHORT_TESTS=OFF \
@@ -55,7 +55,10 @@ cmake $cwd/deps/ANTs/ \
 -DBUILD_SHARED_LIBS:BOOL=OFF \
 -DBUILD_ALL_ANTS_APPS:BOOL=OFF \
 -DCMAKE_CXX_FLAGS="-fopenmp" \
--DCMAKE_EXE_LINKER_FLAGS="-static"
+-DCMAKE_EXE_LINKER_FLAGS="-static" \
+-DCMAKE_FIND_LIBRARY_SUFFIXES=".a"
+
+# see: https://www.kitware.com/creating-static-executables-on-linux/
 
 sh ${script_dir}/make.sh
 cd $cwd
