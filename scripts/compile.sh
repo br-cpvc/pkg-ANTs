@@ -20,12 +20,16 @@ source $build_script $itk_dir
 # only build the subset of Example binaries needed
 sed -i 's/foreach(ANTS_APP ${BASE_ANTS_APPS})/foreach(ANTS_APP ImageMath N3BiasFieldCorrection N4BiasFieldCorrection Atropos)/g' deps/ANTs/Examples/CMakeLists.txt
 
+sed -i 's/VERSION 2.8.9/VERSION 2.8.7/g' deps/ANTs/CMakeLists.txt
+
 # make
 mkdir -p $outputdir/build
 cd $outputdir/build
 cmake $cwd/deps/ANTs/ \
 -DCMAKE_INSTALL_PREFIX=../install \
 -DCMAKE_BUILD_TYPE=Release \
+-DCMAKE_C_COMPILER=/usr/bin/gcc-4.8 \
+-DCMAKE_CXX_COMPILER=/usr/bin/g++-4.8 \
 -DITK_DIR=$cwd/$itk_dir/build \
 -DRUN_LONG_TESTS=OFF \
 -DRUN_SHORT_TESTS=OFF \
