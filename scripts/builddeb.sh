@@ -19,11 +19,12 @@ cp $builddir/N3BiasFieldCorrection ${deb_root}/usr/bin
 cp $builddir/N4BiasFieldCorrection ${deb_root}/usr/bin
 
 cmake_version_file=deps/ANTs/CMakeLists.txt
-version_major=$(cat $cmake_version_file | grep "_VERSION_MAJOR " | awk '{print $2}' | cut -d'"' -f2)
-version_minor=$(cat $cmake_version_file | grep "_VERSION_MINOR " | awk '{print $2}' | cut -d'"' -f2)
-version_patch=$(cat $cmake_version_file | grep "_VERSION_PATCH " | awk '{print $2}' | cut -d'"' -f2 | tr -d v)
+version_major=$(cat $cmake_version_file | grep "_VERSION_MAJOR " | awk '{print $2}' | cut -d'"' -f2 | tr -d ')')
+version_minor=$(cat $cmake_version_file | grep "_VERSION_MINOR " | awk '{print $2}' | cut -d'"' -f2 | tr -d ')')
+version_patch=$(cat $cmake_version_file | grep "_VERSION_PATCH " | awk '{print $2}' | cut -d'"' -f2 | tr -d ')' | tr -d v)
 
 version="$version_major.$version_minor.$version_patch"
+version="2.1.0-26135b1971657f23a92f20e63582836cf86408e1"
 package="ants"
 maintainer="ANTsX/ANTs <https://github.com/ANTsX/ANTs/issues>"
 arch="amd64"
