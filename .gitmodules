@@ -1,3 +1,6 @@
+[submodule "deps/deps/ANTs"]
+	path = deps/deps/ANTs
+	url = https://github.com/ANTsX/ANTs.git
 [submodule "deps/ANTs"]
 	path = deps/ANTs
-	url = ../ANTs.git
+	url = https://github.com/ANTsX/ANTs.git
