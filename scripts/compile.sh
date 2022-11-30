@@ -7,6 +7,7 @@ cwd=`pwd`
 #itk_version="4.5.0"
 #itk_version="4.7.2"
 itk_version=4.8.2
+itk_version=4.9.0
 itk_dir_prefix="InsightToolkit"
 outputdir=$2
 source ${script_dir}/dwn_itk.sh $itk_dir_prefix $itk_version $outputdir
@@ -19,6 +20,8 @@ source $build_script $itk_dir
 
 # only build the subset of Example binaries needed
 sed -i 's/foreach(ANTS_APP ${BASE_ANTS_APPS})/foreach(ANTS_APP ImageMath N3BiasFieldCorrection N4BiasFieldCorrection Atropos)/g' deps/ANTs/Examples/CMakeLists.txt
+
+sed -i 's/VERSION 2.8.9/VERSION 2.8.7/g' deps/ANTs/CMakeLists.txt
 
 # make
 mkdir -p $outputdir/build
