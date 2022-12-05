@@ -46,8 +46,8 @@ cd $outputdir/build
 cmake $cwd/deps/ANTs/ \
 -DCMAKE_INSTALL_PREFIX=../install \
 -DCMAKE_BUILD_TYPE=Release \
--DCMAKE_C_COMPILER=/usr/bin/gcc-11 \
--DCMAKE_CXX_COMPILER=/usr/bin/g++-11 \
+-DCMAKE_C_COMPILER=/usr/bin/gcc-4.8 \
+-DCMAKE_CXX_COMPILER=/usr/bin/g++-4.8 \
 -DITK_DIR=$cwd/$itk_dir/build \
 -DRUN_LONG_TESTS=OFF \
 -DRUN_SHORT_TESTS=OFF \

@@ -36,7 +36,7 @@ fi
 deb_root=${outputdir}/debian
 rm -rf ${deb_root}/usr
 mkdir -p ${deb_root}/usr/bin
-bindir=${outputdir}/build/ANTS-build/Examples
+bindir=${outputdir}/build/bin
 cp $bindir/Atropos ${deb_root}/usr/bin
 cp $bindir/ImageMath ${deb_root}/usr/bin
 cp $bindir/N3BiasFieldCorrection ${deb_root}/usr/bin
@@ -44,11 +44,12 @@ cp $bindir/N4BiasFieldCorrection ${deb_root}/usr/bin
 
 cmake_version_file=deps/ANTs/CMakeLists.txt
 cmake_version_file=deps/ANTs/Version.cmake
-version_major=$(cat $cmake_version_file | grep "_VERSION_MAJOR " | awk '{print $2}' | cut -d'"' -f2)
-version_minor=$(cat $cmake_version_file | grep "_VERSION_MINOR " | awk '{print $2}' | cut -d'"' -f2)
-version_patch=$(cat $cmake_version_file | grep "_VERSION_PATCH " | awk '{print $2}' | cut -d'"' -f2 | tr -d v)
+version_major=$(cat $cmake_version_file | grep "_VERSION_MAJOR " | awk '{print $2}' | cut -d'"' -f2 | tr -d ')')
+version_minor=$(cat $cmake_version_file | grep "_VERSION_MINOR " | awk '{print $2}' | cut -d'"' -f2 | tr -d ')')
+version_patch=$(cat $cmake_version_file | grep "_VERSION_PATCH " | awk '{print $2}' | cut -d'"' -f2 | tr -d ')' | tr -d v)
 
 version="$version_major.$version_minor.$version_patch"
+version="2.3.0"
 package="ants"
 maintainer="ANTsX/ANTs <https://github.com/ANTsX/ANTs/issues>"
 arch="amd64"
