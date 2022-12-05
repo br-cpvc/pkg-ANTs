@@ -1,3 +1,6 @@
 [submodule "deps/ANTs"]
 	path = deps/ANTs
 	url = ../ANTs.git
+[submodule "deps/ITK"]
+	path = deps/ITK
+	url = https://github.com/InsightSoftwareConsortium/ITK.git

@@ -12,7 +12,8 @@ if [[ "$old_method" == true ]]; then
     #itk_version="4.7.2"
     itk_version=4.8.2
     itk_version=5.2.1
-    itk_version=5.3rc04
+    itk_version=5.0b01
+    #itk_version=5.3rc04
     itk_dir_prefix="InsightToolkit"
     outputdir=$2
     source ${script_dir}/dwn_itk.sh $itk_dir_prefix $itk_version $outputdir
@@ -21,12 +22,12 @@ if [[ "$old_method" == true ]]; then
 else
     # use git submodule checkout version of itk,
     # needs to have added itk as git submodule deps/ITK
-    #itk_dir="deps/ITK"
+    itk_dir="deps/ITK"
 
     # git clone and checkout the itk version specified in
     # the ANTs SuperBuild/External_ITKv5.cmake script, then
     # patch it.
-    itk_dir="$outputdir/ITKv5_git_checkout"
+    #itk_dir="$outputdir/ITKv5_git_checkout"
     source ${script_dir}/checkout_itk_from_git.sh $itk_dir
 fi
 
@@ -46,17 +47,17 @@ cd $outputdir/build
 cmake $cwd/deps/ANTs/ \
 -DCMAKE_INSTALL_PREFIX=../install \
 -DCMAKE_BUILD_TYPE=Release \
--DCMAKE_C_COMPILER=/usr/bin/gcc-11 \
--DCMAKE_CXX_COMPILER=/usr/bin/g++-11 \
+-DCMAKE_C_COMPILER=/usr/bin/gcc-5 \
+-DCMAKE_CXX_COMPILER=/usr/bin/g++-5 \
 -DITK_DIR=$cwd/$itk_dir/build \
 -DRUN_LONG_TESTS=OFF \
 -DRUN_SHORT_TESTS=OFF \
 -DBUILD_TESTING=OFF \
--DBUILD_SHARED_LIBS:BOOL=OFF \
 -DBUILD_ALL_ANTS_APPS:BOOL=OFF \
--DCMAKE_CXX_FLAGS="-fopenmp" \
--DCMAKE_EXE_LINKER_FLAGS="-static" \
--DCMAKE_FIND_LIBRARY_SUFFIXES=".a"
+-DCMAKE_CXX_FLAGS="-fopenmp"
+#-DCMAKE_EXE_LINKER_FLAGS="-static" \
+#-DCMAKE_FIND_LIBRARY_SUFFIXES=".a"
+#-DBUILD_SHARED_LIBS:BOOL=OFF \
 
 # see: https://www.kitware.com/creating-static-executables-on-linux/
 
