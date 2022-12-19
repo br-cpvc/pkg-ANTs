@@ -3,4 +3,4 @@
 	url = ../ANTs.git
 [submodule "deps/ITK"]
 	path = deps/ITK
-	url = https://github.com/InsightSoftwareConsortium/ITK.git
+	url = ../ITK.git
