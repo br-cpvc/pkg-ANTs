@@ -37,6 +37,7 @@ deb_root=${outputdir}/debian
 rm -rf ${deb_root}/usr
 mkdir -p ${deb_root}/usr/bin
 bindir=${outputdir}/build/bin/
+#bindir=${outputdir}/build/ANTS-build/Examples/
 cp $bindir/Atropos ${deb_root}/usr/bin
 cp $bindir/ImageMath ${deb_root}/usr/bin
 cp $bindir/N3BiasFieldCorrection ${deb_root}/usr/bin
@@ -49,7 +50,7 @@ version_minor=$(cat $cmake_version_file | grep "_VERSION_MINOR " | awk '{print $
 version_patch=$(cat $cmake_version_file | grep "_VERSION_PATCH " | awk '{print $2}' | cut -d'"' -f2 | tr -d ')' | tr -d v)
 
 version="$version_major.$version_minor.$version_patch"
-version="2.2.0"
+version="2.3.1"
 package="ants"
 maintainer="ANTsX/ANTs <https://github.com/ANTsX/ANTs/issues>"
 arch="amd64"
