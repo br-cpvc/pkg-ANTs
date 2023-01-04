@@ -56,9 +56,11 @@ cmake $cwd/deps/ANTs/ \
 -DBUILD_TESTING=OFF \
 -DBUILD_ALL_ANTS_APPS:BOOL=OFF \
 -DCMAKE_CXX_FLAGS="-fopenmp" \
--DCMAKE_EXE_LINKER_FLAGS="-static" \
+-DCMAKE_EXE_LINKER_FLAGS="-static -Wl,--whole-archive -lpthread -Wl,--no-whole-archive" \
 -DBUILD_SHARED_LIBS:BOOL=OFF \
 -DCMAKE_FIND_LIBRARY_SUFFIXES=".a"
+
+# -Wl,--whole-archive -lpthread -Wl,--no-whole-archive was added to the linker line as the patch: https://github.com/InsightSoftwareConsortium/ITK/commit/082ac23c36d57273ffbf0fa4b161a809bf48ad95 made N4BiasFieldCorrection fail with segmentation fault when static linked using gcc 4.8 and calling std::this_thread::get_id() found the solution in: https://gcc.gnu.org/pipermail/libstdc++/2014-October/042002.html
 
 # see: https://www.kitware.com/creating-static-executables-on-linux/
 
