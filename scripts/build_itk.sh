@@ -15,8 +15,8 @@ if [ -d $itk_dir ]; then
     cmake .. \
 	-DCMAKE_INSTALL_PREFIX=../install \
 	-DCMAKE_BUILD_TYPE=Release \
-	-DCMAKE_C_COMPILER=/usr/bin/gcc-4.6 \
-	-DCMAKE_CXX_COMPILER=/usr/bin/g++-4.6 \
+	-DCMAKE_C_COMPILER=/usr/bin/gcc-5 \
+	-DCMAKE_CXX_COMPILER=/usr/bin/g++-5 \
 	-DBUILD_EXAMPLES=OFF \
 	-DBUILD_TESTING=OFF \
 	-DITK_LEGACY_REMOVE:BOOL=OFF \
