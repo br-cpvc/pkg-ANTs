@@ -57,7 +57,6 @@ cmake $cwd/deps/ANTs/ \
 -DBUILD_ALL_ANTS_APPS:BOOL=OFF \
 -DCMAKE_EXE_LINKER_FLAGS="-static -Wl,--whole-archive -lpthread -Wl,--no-whole-archive" \
 -DCMAKE_CXX_FLAGS="-fopenmp -fpermissive" \
--DCMAKE_EXE_LINKER_FLAGS="-static" \
 -DBUILD_SHARED_LIBS:BOOL=OFF \
 -DCMAKE_FIND_LIBRARY_SUFFIXES=".a"
 
