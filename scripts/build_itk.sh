@@ -15,17 +15,17 @@ if [ -d $itk_dir ]; then
     cmake .. \
 	-DCMAKE_INSTALL_PREFIX=../install \
 	-DCMAKE_BUILD_TYPE=Release \
-	-DCMAKE_C_COMPILER=/usr/bin/gcc-4.8 \
-	-DCMAKE_CXX_COMPILER=/usr/bin/g++-4.8 \
+	-DCMAKE_C_COMPILER=/usr/bin/gcc-4.6 \
+	-DCMAKE_CXX_COMPILER=/usr/bin/g++-4.6 \
 	-DBUILD_EXAMPLES=OFF \
 	-DBUILD_TESTING=OFF \
 	-DITK_LEGACY_REMOVE:BOOL=OFF \
 	-DModule_GenericLabelInterpolator:BOOL=ON \
-	-DModule_AdaptiveDenoising:BOOL=ON \
 	-DBUILD_SHARED_LIBS=OFF \
 	-DITK_DYNAMIC_LOADING=OFF \
-	-DCMAKE_CXX_FLAGS="-fpermissive -std=c++11" \
+	-DCMAKE_CXX_FLAGS="-fpermissive" \
 	-DModule_ITKReview=ON
+#	-DModule_AdaptiveDenoising:BOOL=ON \
     n=`nproc --ignore 1`
     make -j $n install
     cd $cwd
