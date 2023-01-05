@@ -10,7 +10,7 @@ RUN apt-get install python-software-properties -y
 # https://gist.github.com/application2000/73fd6f4bf1be6600a2cf9f56315a2d91
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test -y
 RUN apt-get update
-RUN apt-get install -y g++-4.6
+RUN apt-get install -y g++-5
 
 # get newer git version, should be higher than 1.7.10 for the ITKDownloadSetup.cmake
 # script to be able to use https to download the needed modules.
