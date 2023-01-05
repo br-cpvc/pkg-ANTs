@@ -24,6 +24,7 @@ if [ -d $itk_dir ]; then
 	-DModule_AdaptiveDenoising:BOOL=ON \
 	-DBUILD_SHARED_LIBS=OFF \
 	-DITK_DYNAMIC_LOADING=OFF \
+	-DCMAKE_CXX_FLAGS="-fpermissive -std=c++11" \
 	-DModule_ITKReview=ON
     n=`nproc --ignore 1`
     make -j $n install
