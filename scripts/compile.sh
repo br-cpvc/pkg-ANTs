@@ -48,15 +48,15 @@ cd $outputdir/build
 cmake $cwd/deps/ANTs/ \
 -DCMAKE_INSTALL_PREFIX=../install \
 -DCMAKE_BUILD_TYPE=Release \
--DCMAKE_C_COMPILER=/usr/bin/gcc-4.8 \
--DCMAKE_CXX_COMPILER=/usr/bin/g++-4.8 \
+-DCMAKE_C_COMPILER=/usr/bin/gcc-4.6 \
+-DCMAKE_CXX_COMPILER=/usr/bin/g++-4.6 \
 -DITK_DIR=$cwd/$itk_dir/build \
 -DRUN_LONG_TESTS=OFF \
 -DRUN_SHORT_TESTS=OFF \
 -DBUILD_TESTING=OFF \
 -DBUILD_ALL_ANTS_APPS:BOOL=OFF \
--DCMAKE_CXX_FLAGS="-fopenmp" \
 -DCMAKE_EXE_LINKER_FLAGS="-static -Wl,--whole-archive -lpthread -Wl,--no-whole-archive" \
+-DCMAKE_CXX_FLAGS="-fopenmp -fpermissive" \
 -DBUILD_SHARED_LIBS:BOOL=OFF \
 -DCMAKE_FIND_LIBRARY_SUFFIXES=".a"
 
