@@ -48,8 +48,8 @@ cd $outputdir/build
 cmake $cwd/deps/ANTs/ \
 -DCMAKE_INSTALL_PREFIX=../install \
 -DCMAKE_BUILD_TYPE=Release \
--DCMAKE_C_COMPILER=/usr/bin/gcc-5 \
--DCMAKE_CXX_COMPILER=/usr/bin/g++-5 \
+-DCMAKE_C_COMPILER=/usr/bin/gcc \
+-DCMAKE_CXX_COMPILER=/usr/bin/g++ \
 -DITK_DIR=$cwd/$itk_dir/build \
 -DRUN_LONG_TESTS=OFF \
 -DRUN_SHORT_TESTS=OFF \
