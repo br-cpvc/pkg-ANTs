@@ -50,7 +50,6 @@ version_minor=$(cat $cmake_version_file | grep "_VERSION_MINOR " | awk '{print $
 version_patch=$(cat $cmake_version_file | grep "_VERSION_PATCH " | awk '{print $2}' | cut -d'"' -f2 | tr -d ')' | tr -d v)
 
 version="$version_major.$version_minor.$version_patch"
-version="2.3.3"
 package="ants"
 maintainer="ANTsX/ANTs <https://github.com/ANTsX/ANTs/issues>"
 arch="amd64"
